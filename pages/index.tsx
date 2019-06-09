@@ -1,7 +1,7 @@
 import React from "react";
 
 export default () => (
-  <main className="h-screen w-screen flex flex-col justify-between bg-indigo-100">
+  <main className="h-screen w-full flex flex-col justify-between bg-indigo-100">
     <Header />
     <CTA />
     <Hero />
@@ -98,7 +98,7 @@ const Button: React.FC<{ label: React.ReactNode }> = ({ label }) => (
 );
 
 const Centerer: React.FC = ({ children }) => (
-  <div className="mx-auto flex flex-col justify-center content-center">
+  <div className="mx-auto justify-center content-center">
     {children}
   </div>
 );
