@@ -41,8 +41,7 @@ const Hero = () => (
         <span className="uppercase font-bold text-sm text-indigo-100 bg-pink-700 px-1 inline-block">
           Nope!
         </span>{" "}
-        Call a meeting of Overcommitters Club wherever you find yourself! Take
-        time to relax
+        Call a meeting of Overcommitters Club wherever you find yourself! If you're looking for a community to share your successes, or just commisserate with other overcommitters, join our Slack!
       </p>
     </FAQ>
     <FAQ question="What sorts of things can I do with this time?">
@@ -53,6 +52,12 @@ const Hero = () => (
         Use it to do whatever you like. Chill out. Answer those boring emails.
         Better yet, unsubscribe from a bunch of mailing lists. It's your time.
         This is just one way to get that time back.
+      </p>
+    </FAQ>
+    <FAQ question="What is skipconf, and how does it relate to Overcommitters Club?">
+      <p className="py-2">
+        <span className="uppercase font-bold text-sm text-indigo-100 bg-pink-700 px-1 inline-block">They're pals!</span>{" "}
+        They're philosophically similar: both pseudo-events aimed at giving people the time and space to focus on things that get put on the back burner. Overcommitters Club and skipconf share an <a className="underline" href="https://twitter.com/brandon_mn">organizer</a> and a Slack workspace (because who needs more Slack workspaces?)
       </p>
     </FAQ>
   </section>
@@ -70,8 +75,9 @@ const CTA = () => (
       <p className="py-2 px-8 text-md text-center">
         Take two hours back. Takes place wherever you are.
       </p>
-      <div className="text-center py-4">
-        <Button label={<>Add to calendar</>} />
+      <div className="text-center">
+        <Button label={"Add to calendar"} href="/static/overcommitters-club.ics" />
+        <Button label={"Join the Slack"} href="https://join.slack.com/t/skipconf/shared_invite/enQtNjQ4MzIxMjk2ODk5LTIxZGMyN2RmMjUyNTJkZTQxYTM3ZDcyYmJiZjFkNTY4OTFmMGQ1YzY4MDdlZjlhNDY2MGFlN2FmMjBiZTgzNGE" />
       </div>
     </div>
   </Centerer>
@@ -88,10 +94,10 @@ const FAQ: React.FC<{
   </div>
 );
 
-const Button: React.FC<{ label: React.ReactNode }> = ({ label }) => (
+const Button: React.FC<{ label: React.ReactNode, href: string }> = ({ label, href }) => (
   <a
-    href="/static/overcommitters-club.ics"
-    className="px-4 py-2 my-8 lg:my-16 bg-pink-700 text-indigo-100 font-bold text-lg rounded lowercase"
+    href={href}
+    className="px-4 py-2 m-2 bg-pink-700 text-indigo-100 font-bold text-lg rounded lowercase inline-block"
   >
     {label}
   </a>
