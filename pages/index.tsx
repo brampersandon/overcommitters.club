@@ -17,7 +17,7 @@ const Header = () => (
       </h1>
     </div>
     <div>
-      <h2 className="lg:text-xl text-md lowercase italic font-bold text-pink-700 bg-indigo-100 px-1 inline-block">
+      <h2 className="lg:text-xl text-sm md:text-md lowercase italic font-bold text-pink-700 bg-indigo-100 px-1 inline-block">
         Don't have time for this? You're in the right place.
       </h2>
     </div>
