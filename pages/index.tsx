@@ -113,7 +113,7 @@ const Footer: React.FC = () => (
   <div className="container mx-auto max-w-4xl">
     <p className="lg:text-md text-sm lowercase italic font-bold text-indigo-100 bg-pink-700 px-1 my-1 inline-block">
       brought to you by your friends at{" "}
-      <a className="underline" href="https://www.leftblank.co">
+      <a className="underline" href="http://www.leftblank.co">
         left blank
       </a>
       .
