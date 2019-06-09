@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "name": "overcommitters.club",
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@now/next"
+        }
+    ],
+    "alias": "overcommitters.club"
+}
