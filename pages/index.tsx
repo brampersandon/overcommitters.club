@@ -65,20 +65,6 @@ const Hero = () => (
         This is just one way to get that time back.
       </p>
     </FAQ>
-    <FAQ question="What is skipconf, and how does it relate to Overcommitters Club?">
-      <p className="py-2">
-        <span className="uppercase font-bold text-sm text-indigo-100 bg-pink-700 px-1 inline-block">
-          They're pals!
-        </span>{" "}
-        They're philosophically similar: both pseudo-events aimed at giving
-        people the time and space to focus on things that get put on the back
-        burner. Overcommitters Club and skipconf share an{" "}
-        <a className="underline" href="https://twitter.com/brandon_mn">
-          organizer
-        </a>{" "}
-        and a Slack workspace (because who needs more Slack workspaces?)
-      </p>
-    </FAQ>
   </section>
 );
 
