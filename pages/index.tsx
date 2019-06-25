@@ -1,5 +1,13 @@
 import React from "react";
-import {format, isAfter, getMonth, setMonth, setDate} from "date-fns";
+import {
+  format,
+  isAfter,
+  getMonth,
+  setMonth,
+  setDate,
+  setHours,
+  setMinutes
+} from "date-fns";
 
 export default () => (
   <main className="h-screen w-full flex flex-col justify-between bg-indigo-100">
@@ -75,15 +83,18 @@ const Hero = () => (
 );
 
 const getDate = () => {
-  const now = new Date()
-  const thirteenthOfThisMonth = setDate(now, 13);
+  const now = new Date();
+  const thirteenthOfThisMonth = setMinutes(
+    setHours(setDate(new Date(), 13), 18),
+    30
+  );
   let nextEvent = thirteenthOfThisMonth;
   if (isAfter(now, thirteenthOfThisMonth)) {
     const thisMonth = getMonth(thirteenthOfThisMonth);
     nextEvent = setMonth(nextEvent, thisMonth + 1);
   }
-  return format(nextEvent, 'dddd MMMM Do, YYYY')
-}
+  return format(nextEvent, "dddd MMMM Do, YYYY @ hh:mma");
+};
 
 const CTA = () => (
   <Centerer>
@@ -92,7 +103,7 @@ const CTA = () => (
         Join the club
       </h3>
       <p className="text-center py-2 px-8 text-md">
-        <strong>Next:</strong> {getDate()} @ 6:30pm
+        <strong>Next:</strong> {getDate()}
       </p>
       <p className="py-2 px-8 text-md text-center">
         Take two hours back. Takes place wherever you are.
@@ -112,7 +123,7 @@ const CTA = () => (
 );
 
 const FAQ: React.FC<{
-  question: string;
+  question: string
 }> = ({ question, children }) => (
   <div className="px-4 py-4">
     <h3 className="lg:text-3xl text-lg font-bold bg-indigo-100 text-pink-700 inline-block italic lowercase">
@@ -122,7 +133,7 @@ const FAQ: React.FC<{
   </div>
 );
 
-const Button: React.FC<{ label: React.ReactNode; href: string }> = ({
+const Button: React.FC<{ label: React.ReactNode, href: string }> = ({
   label,
   href
 }) => (
