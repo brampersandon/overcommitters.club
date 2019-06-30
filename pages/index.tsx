@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import {
   format,
   isAfter,
@@ -52,7 +53,15 @@ const Hero = () => (
         </span>{" "}
         Call a meeting of Overcommitters Club wherever you find yourself! If
         you're looking for a community to share your successes, or just
-        commisserate with other overcommitters, join our Slack!
+        commisserate with other overcommitters,{' '}
+        <a
+          className="underline font-bold text-pink-700"
+          href="https://join.slack.com/t/skipconf/shared_invite/enQtNjQ4MzIxMjk2ODk5LTIxZGMyN2RmMjUyNTJkZTQxYTM3ZDcyYmJiZjFkNTY4OTFmMGQ1YzY4MDdlZjlhNDY2MGFlN2FmMjBiZTgzNGE"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          join our Slack
+        </a>!
       </p>
     </FAQ>
     <FAQ question="What sorts of things can I do with this time?">
@@ -68,7 +77,7 @@ const Hero = () => (
   </section>
 );
 
-const getDate = () => {
+const nextEventDate = () => {
   const now = new Date();
   const thirteenthOfThisMonth = setMinutes(
     setHours(setDate(new Date(), 13), 18),
@@ -79,8 +88,19 @@ const getDate = () => {
     const thisMonth = getMonth(thirteenthOfThisMonth);
     nextEvent = setMonth(nextEvent, thisMonth + 1);
   }
-  return format(nextEvent, "dddd MMMM Do, YYYY @ hh:mma");
+  return nextEvent
 };
+
+const getFormattedEventDate = () => {
+  return format(nextEventDate(), "dddd MMMM Do, YYYY @ hh:mma");
+};
+
+const nextEventStartTime = "20190713T233000Z";
+const nextEventEndTime =   "20190714T013000Z";
+
+const googleCalendarURL = () => {
+  return `http://www.google.com/calendar/event?action=TEMPLATE&dates=${nextEventStartTime}%2F${nextEventEndTime}&text=Overcommitters%20Club&details=Overcommitters%20Club%20monthly%20event.%20More%20info%3A%20https%3A%2F%2Fovercommitters.club.`
+}
 
 const CTA = () => (
   <Centerer>
@@ -89,19 +109,21 @@ const CTA = () => (
         Join the club
       </h3>
       <p className="text-center py-2 px-8 text-md">
-        <strong>Next:</strong> {getDate()}
+        <strong>Next:</strong> {getFormattedEventDate()}
       </p>
       <p className="py-2 px-8 text-md text-center">
         Take two hours back. Takes place wherever you are.
       </p>
       <div className="text-center">
         <Button
-          label={"Add to calendar"}
+          label={"Add to calendar (ics)"}
           href="/static/overcommitters-club.ics"
         />
         <Button
-          label={"Join the Slack"}
-          href="https://join.slack.com/t/skipconf/shared_invite/enQtNjQ4MzIxMjk2ODk5LTIxZGMyN2RmMjUyNTJkZTQxYTM3ZDcyYmJiZjFkNTY4OTFmMGQ1YzY4MDdlZjlhNDY2MGFlN2FmMjBiZTgzNGE"
+          label={"Add to google calendar"}
+          href={googleCalendarURL()}
+          target="_blank"
+          rel="noopener noreferrer"
         />
       </div>
     </div>
@@ -119,13 +141,17 @@ const FAQ: React.FC<{
   </div>
 );
 
-const Button: React.FC<{ label: React.ReactNode, href: string }> = ({
+const Button: React.FC<{ label: React.ReactNode, href: string, target: string, rel: string }> = ({
   label,
-  href
+  href,
+  target,
+  rel
 }) => (
   <a
     href={href}
     className="px-4 py-2 m-2 bg-pink-700 text-indigo-100 font-bold text-lg rounded lowercase inline-block"
+    target={target}
+    rel={rel}
   >
     {label}
   </a>
