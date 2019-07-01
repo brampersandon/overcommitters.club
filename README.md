@@ -4,18 +4,10 @@ It's built on [React](https://reactjs.org/), [Typescript](https://www.typescript
 
 Deploys are automatically triggered on every commit, via [Now](https://zeit.co/now).
 
-# Application setup
+# Running the app locally
 ```
 yarn install
-```
-
-# Running the Application
-To run the app locally:
-```
 yarn next dev
 ```
 
 Then it should be accessible at http://localhost:3000.
-
-# Testing the application
-🤪
