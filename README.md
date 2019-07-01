@@ -1,18 +1,13 @@
-[Overcommitters Club](https://overcommitters.club/) is a joke but also kind of serious side project for people like us who tend to overcommit to things. It's currently live at [https://overcommitters.club](https://overcommitters.club).
+[Overcommitters Club](https://overcommitters.club/) is a joke but also kind of serious side project for people like us who tend to overcommit to things. It's currently live at https://overcommitters.club.
 
 It's built on [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), and [Next](https://nextjs.org/), and uses [Tailwind CSS](https://tailwindcss.com/) for styling.
 
 Deploys are automatically triggered on every commit, via [Now](https://zeit.co/now).
 
-# Application setup
-These instructions assume you're on a mac.
-
+# Running the app locally
 ```
 yarn install
+yarn next dev
 ```
 
-# Running the Application
-At the time of this writing, Matt has no idea how to run the app locally 🙈
-
-# Testing the application
-🤪
+Then it should be accessible at http://localhost:3000.

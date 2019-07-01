@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import {
   format,
   isAfter,
@@ -52,7 +53,15 @@ const Hero = () => (
         </span>{" "}
         Call a meeting of Overcommitters Club wherever you find yourself! If
         you're looking for a community to share your successes, or just
-        commisserate with other overcommitters, join our Slack!
+        commisserate with other overcommitters,{' '}
+        <a
+          className="underline font-bold text-pink-700"
+          href="https://join.slack.com/t/skipconf/shared_invite/enQtNjQ4MzIxMjk2ODk5LTIxZGMyN2RmMjUyNTJkZTQxYTM3ZDcyYmJiZjFkNTY4OTFmMGQ1YzY4MDdlZjlhNDY2MGFlN2FmMjBiZTgzNGE"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          join our Slack
+        </a>!
       </p>
     </FAQ>
     <FAQ question="What sorts of things can I do with this time?">
@@ -68,18 +77,25 @@ const Hero = () => (
   </section>
 );
 
-const getDate = () => {
-  const now = new Date();
-  const thirteenthOfThisMonth = setMinutes(
-    setHours(setDate(new Date(), 13), 18),
-    30
-  );
-  let nextEvent = thirteenthOfThisMonth;
-  if (isAfter(now, thirteenthOfThisMonth)) {
-    const thisMonth = getMonth(thirteenthOfThisMonth);
-    nextEvent = setMonth(nextEvent, thisMonth + 1);
-  }
-  return format(nextEvent, "dddd MMMM Do, YYYY @ hh:mma");
+const nextEventDate = () => {
+  const thirteenth = moment().date(13).startOf('day');
+  return moment().isAfter(thirteenth) ?
+    thirteenth.add(1, 'month') :
+    thirteenth
+};
+
+const nextEventStartTime = nextEventDate().hours(18).minutes(30).seconds(0);
+
+const nextEventEndTime = nextEventDate().hours(20).minutes(30).seconds(0);
+
+const getFormattedEventDate = nextEventStartTime.format("dddd MMMM Do, YYYY @ h:mma");
+
+const formatDateForURL = date => {
+  return date.utc().format("YYYYMMDDTHHmmss") + "Z"
+};
+
+const googleCalendarURL = () => {
+  return `http://www.google.com/calendar/event?action=TEMPLATE&dates=${formatDateForURL(nextEventStartTime)}%2F${formatDateForURL(nextEventEndTime)}&text=Overcommitters%20Club%20meeting&location=&details=This%20is%20your%20friendly%20reminder%20to%20give%20yourself%20back%20a%20few%20hours%20of%20time%20%3A)%0A%0AMore%20info%3A%20https%3A%2F%2Fovercommitters.club&recur=RRULE%3AFREQ%3DMONTHLY%3BINTERVAL%3D1`
 };
 
 const CTA = () => (
@@ -89,19 +105,21 @@ const CTA = () => (
         Join the club
       </h3>
       <p className="text-center py-2 px-8 text-md">
-        <strong>Next:</strong> {getDate()}
+        <strong>Next event:</strong> {getFormattedEventDate}
       </p>
       <p className="py-2 px-8 text-md text-center">
-        Take two hours back. Takes place wherever you are.
+        Occurs on the 13th of every month. Take two hours back. Takes place wherever you are.
       </p>
       <div className="text-center">
         <Button
-          label={"Add to calendar"}
+          label={"Add to calendar (ics)"}
           href="/static/overcommitters-club.ics"
         />
         <Button
-          label={"Join the Slack"}
-          href="https://join.slack.com/t/skipconf/shared_invite/enQtNjQ4MzIxMjk2ODk5LTIxZGMyN2RmMjUyNTJkZTQxYTM3ZDcyYmJiZjFkNTY4OTFmMGQ1YzY4MDdlZjlhNDY2MGFlN2FmMjBiZTgzNGE"
+          label={"Add to google calendar"}
+          href={googleCalendarURL()}
+          target="_blank"
+          rel="noopener noreferrer"
         />
       </div>
     </div>
@@ -119,13 +137,17 @@ const FAQ: React.FC<{
   </div>
 );
 
-const Button: React.FC<{ label: React.ReactNode, href: string }> = ({
+const Button: React.FC<{ label: React.ReactNode, href: string, target: string, rel: string }> = ({
   label,
-  href
+  href,
+  target,
+  rel
 }) => (
   <a
     href={href}
     className="px-4 py-2 m-2 bg-pink-700 text-indigo-100 font-bold text-lg rounded lowercase inline-block"
+    target={target}
+    rel={rel}
   >
     {label}
   </a>
